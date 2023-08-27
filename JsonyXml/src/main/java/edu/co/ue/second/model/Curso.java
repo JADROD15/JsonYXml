@@ -1,9 +1,10 @@
 package edu.co.ue.second.model;
 
 import java.util.ArrayList;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@JacksonXmlRootElement
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Curso {
 	private String name;
 	private double duration;
@@ -85,11 +86,11 @@ public class Curso {
 		return this.cursos;
 	}
 	
-	public ArrayList<Curso> putCurso(String name, double duration, double cost, int ability) {
+	public ArrayList<Curso> putCurso(String name, String namePut, double duration, double cost, int ability) {
         ArrayList<Curso> cursos = myListCursos();
         for (Curso curso : cursos) {
             if (curso.getName().equals(name)) {
-                curso.setName(name);
+                curso.setName(namePut);
                 curso.setDuration(duration);
                 curso.setCost(cost);
                 curso.setAbility(ability);

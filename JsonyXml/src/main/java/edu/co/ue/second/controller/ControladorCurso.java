@@ -45,26 +45,16 @@ public class ControladorCurso {
 		return curso.deleteCurso(name);
 	}
 	
-	@PostMapping(value="curso", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_XML_VALUE)
+	@PostMapping(value="curso", consumes=MediaType.APPLICATION_XML_VALUE, produces=MediaType.APPLICATION_XML_VALUE)
 	public List<Curso> postCurso(@RequestBody Curso c) {
 		return curso.postCurso(c);
 	}
 	
-	@PutMapping(value = "cursos/{name}", consumes = MediaType.APPLICATION_XML_VALUE)
-    public List<Curso> putCurso(@PathVariable("name") String name, @RequestBody Curso cursoToUpdate) {
-        List<Curso> cursos = curso.myListCursos();
-
-        for (Curso curso : cursos) {
-            if (curso.getName().equals(name)) {
-                curso.setName(cursoToUpdate.getName());
-                curso.setDuration(cursoToUpdate.getDuration());
-                curso.setCost(cursoToUpdate.getCost());
-                curso.setAbility(cursoToUpdate.getAbility());
-                break;
-            }
-        }
-
-        return cursos; 
+	@PutMapping(value = "cursos/{name}", consumes = MediaType.APPLICATION_XML_VALUE, produces=MediaType.APPLICATION_XML_VALUE)
+    public List<Curso> putCurso(@PathVariable("name") String name, @RequestBody Curso cursoPut) {
+        
+        return curso.putCurso(name, cursoPut.getName(), cursoPut.getDuration(), cursoPut.getCost(), cursoPut.getAbility()); 
+        
     }
 	
 }
