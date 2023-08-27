@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,5 +49,22 @@ public class ControladorCurso {
 	public List<Curso> postCurso(@RequestBody Curso c) {
 		return curso.postCurso(c);
 	}
+	
+	@PutMapping(value = "cursos/{name}", consumes = MediaType.APPLICATION_XML_VALUE)
+    public List<Curso> putCurso(@PathVariable("name") String name, @RequestBody Curso cursoToUpdate) {
+        List<Curso> cursos = curso.myListCursos();
+
+        for (Curso curso : cursos) {
+            if (curso.getName().equals(name)) {
+                curso.setName(cursoToUpdate.getName());
+                curso.setDuration(cursoToUpdate.getDuration());
+                curso.setCost(cursoToUpdate.getCost());
+                curso.setAbility(cursoToUpdate.getAbility());
+                break;
+            }
+        }
+
+        return cursos; 
+    }
 	
 }

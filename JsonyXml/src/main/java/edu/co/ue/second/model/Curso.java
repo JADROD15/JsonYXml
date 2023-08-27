@@ -85,4 +85,18 @@ public class Curso {
 		return this.cursos;
 	}
 	
+	public ArrayList<Curso> putCurso(String name, double duration, double cost, int ability) {
+        ArrayList<Curso> cursos = myListCursos();
+        for (Curso curso : cursos) {
+            if (curso.getName().equals(name)) {
+                curso.setName(name);
+                curso.setDuration(duration);
+                curso.setCost(cost);
+                curso.setAbility(ability);
+                break;
+            }
+        }
+        return cursos;
+    }
+	
 }
